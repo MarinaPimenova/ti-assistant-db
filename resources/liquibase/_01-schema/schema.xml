@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+            http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="1" author="pm">
+        <sqlFile
+                path="_001_create_schema.sql"
+                relativeToChangelogFile="true"
+                encoding="UTF-8"
+                splitStatements="false"/>
+    </changeSet>
+
+    <changeSet id="2" author="pm">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*)
+                FROM pg_tables
+                WHERE schemaname = 'assistant'
+                  AND tablename = 'chat'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="_002_create_chat_table.sql"
+                relativeToChangelogFile="true"
+                encoding="UTF-8"
+                splitStatements="false"/>
+    </changeSet>
+    <changeSet id="3" author="pm">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*)
+                FROM pg_tables
+                WHERE schemaname = 'assistant'
+                AND tablename = 'question'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="_003_create_question_table.sql"
+                 relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet id="4" author="pm">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*)
+                FROM pg_tables
+                WHERE schemaname = 'assistant'
+                AND tablename = 'document_result'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="_004_create_document_result_table.sql" relativeToChangelogFile="true"
+                 encoding="utf8" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet id="5" author="pm">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*)
+                FROM pg_tables
+                WHERE schemaname = 'assistant'
+                AND tablename = 'nlp2sql_result'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="_005_create_nlp2sql_result_table.sql" relativeToChangelogFile="true"
+                 encoding="utf8" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet id="6" author="pm">
+        <sqlFile path="_006_create_chat_index.sql" relativeToChangelogFile="true"
+                 encoding="utf8" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet id="7" author="pm">
+        <sqlFile path="_007_create_question_index.sql" relativeToChangelogFile="true"
+                 encoding="utf8" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet id="8" author="pm">
+        <sqlFile path="_008_create_agents_index.sql" relativeToChangelogFile="true"
+                 encoding="utf8" splitStatements="false"/>
+    </changeSet>
+
+</databaseChangeLog>
