@@ -4,7 +4,7 @@ set -ex
 
 DB_ADDRESS="${DB_ADDRESS:-ti-assistant-db:5432}"
 DB_PASSWORD=qwerty
-DB_username=assistant_user
+DB_USERNAME=assistant_user
 
 # psql -h ${DB_ADDRESS} -U ${DB_username} -d assistant_db -tc "CREATE SCHEMA IF NOT EXISTS assistant AUTHORIZATION assistant_user;"
  docker run --rm \

@@ -8,7 +8,6 @@ DB_ADDRESS=<see service name in docker-compose.yml>
 DB_PASSWORD=qwerty
 DB_username=assistant_user
 
-export PGPASSWORD="${DB_PASSWORD}"
 # psql -h ${DB_ADDRESS} -U ${DB_username} -d assistant_db -tc "CREATE SCHEMA IF NOT EXISTS assistant AUTHORIZATION assistant_user;"
 docker run --rm -v ./resources/liquibase:/liquibase/changelog \
   mnpma/liquibase-pg:5.0 \
